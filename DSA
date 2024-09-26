@@ -1,0 +1,137 @@
+#include <stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+char data[20];
+struct node *next;
+struct node *prev;
+}node;
+int main()
+{
+node *a,*b,*c,*head;
+node *temp;
+int op;
+char name[20];
+a = (node*)malloc(sizeof(node));
+b = (node*)malloc(sizeof(node));
+c = (node*)malloc(sizeof(node));
+printf("\nEnter the name of the contacts (MAX 3):-\n");
+scanf("%s",a->data);
+scanf("%s",b->data);
+scanf("%s",c->data);
+
+head = a;
+a->prev = head;
+a->next = b;
+b->next = c;
+b->prev = a;
+c->prev = b;
+c->next = NULL;
+printf("\nOperations you can make in the list:-\n a)For Insertion enter 1\n b)For deletion enter 2\nc)For Traversal enter 3\n d)For searching enter 4\n");
+scanf("%d",&op);
+switch(op)
+{
+case 1:
+
+printf("\nYou've chose insertion\n");
+node *d;
+d = (node*)malloc(sizeof(node));
+printf("\nEnter the contact name you want to insert:-");
+scanf("%s",d->data);
+d->next = head;
+head = d;
+printf("\nThe new linked list after insertion is\n");
+temp = head;
+while(temp != NULL)
+{
+printf("%s->\t<-",temp->data);
+temp = temp->next;
+}
+break;
+
+case 2:
+
+printf("\nYou've choesen deletion\n");
+printf("Enter the contact name you want to delete\n");
+scanf("%s",name);
+if(name == a->data)
+{
+head = a->next;
+free(a);
+printf("\nThe new linked list after deletion is\n");
+temp = head;
+while(temp != NULL)
+{
+printf("%s->\t<-",temp->data);
+temp = temp->next;
+}
+}
+else if(name == b->data)
+{
+head->next = c;
+head->next->next=NULL;
+free(b);
+printf("\nThe new linked list after deletion is\n");
+temp = head;
+while(temp != NULL)
+{
+printf("%s->\t<-",temp->data);
+temp = temp->next;
+
+}
+}
+else(name == c->data);
+{
+head->next->next = NULL;
+free(c);
+printf("\nThe new linked list after deletion is\n");
+temp = head;
+while(temp != NULL)
+{
+printf("%s->\t<-",temp->data);
+temp = temp->next;
+}
+}
+break;
+
+case 3:
+
+printf("\nTraversal of the linked list is\n");
+temp = head;
+while(temp != NULL)
+{
+printf("%s->\t<-",temp->data);
+temp = temp->next;
+}
+
+break;
+
+case 4:
+printf("\nEnter the name you want to search:-");
+scanf("%s\n",name);
+if(name == a->data)
+{
+printf("%s",a->data);
+}
+else if(name == b->data)
+{
+printf("%s",b->data);
+}
+else if(name == c->data)
+{
+printf("%s",c->data);
+}
+else
+{
+printf("Name is not there");
+}
+
+break;
+
+default:
+printf("\nYou chose nothing");
+
+}
+
+return 0;
+}
